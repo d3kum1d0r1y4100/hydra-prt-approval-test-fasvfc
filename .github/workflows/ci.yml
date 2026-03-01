@@ -1,0 +1,19 @@
+name: CI (PRT)
+on:
+  pull_request_target:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - name: Build
+        run: |
+          echo "HYDRA_SENTINEL_PRT_TEST"
+          echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
+          echo "Ref: ${{ github.event.pull_request.head.ref }}"
+          ls -la
